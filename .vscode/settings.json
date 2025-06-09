@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "*.dbclient-js": "javascript",
-        "termios.h": "c"
+        "termios.h": "c",
+        "kilo.h": "c",
+        "output.h": "c"
     }
 }
