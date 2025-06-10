@@ -67,7 +67,7 @@ void editor_draw_status_bar(struct abuf *ab) {
     ab_append(ab, "\x1b[7m", 4);
     // status bar shows filename and total lines.
     char status[80], rstatus[80];
-    int len = snprintf(status, sizeof(status), "%.20s - %d lines", E.filename ? E.filename : "[No Name]", E.num_rows);
+    int len = snprintf(status, sizeof(status), "%.20s - %d lines %s", E.filename ? E.filename : "[No Name]", E.num_rows, E.dirty ? "(modified)" : "");
     int rlen = snprintf(rstatus, sizeof(rstatus), "%d/%d", E.cy + 1, E.num_rows);
     if (len > E.screen_cols) len = E.screen_cols;
     ab_append(ab, status, len);

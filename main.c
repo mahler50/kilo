@@ -19,6 +19,7 @@ void init_editor() {
     E.col_off = 0;
     E.num_rows = 0;
     E.row = NULL;
+    E.dirty = 0;
     E.filename = NULL;
     E.statusmsg[0] = '\0';
     E.statusmsg_time = 0;
@@ -36,7 +37,7 @@ int main(int argc, char **argv) {
         editor_open(argv[1]);
     }
 
-    editor_set_status_message("HELP: CTRL-Q = quit");
+    editor_set_status_message("HELP: CTRL-S = save | CTRL-Q = quit");
 
     while (1) {
         editor_refresh_screen();

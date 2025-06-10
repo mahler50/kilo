@@ -7,8 +7,9 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <stdio.h>
+#include <fcntl.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
@@ -18,11 +19,13 @@
 
 #define KILO_VERSION "0.0.1"
 #define KILO_TAB_STOP 8
+#define KILO_QUIT_TIMES 3
 
 // map a key to ctrl-key
 #define CTRL_KEY(k) ((k) & 0x1f)
 
 enum EditorKey {
+    BACKSPACE = 127,
     ARROW_LEFT = 1000,
     ARROW_RIGHT,
     ARROW_UP,
@@ -40,7 +43,7 @@ enum EditorKey {
 typedef struct erow {
     int size;
     int rsize;
-    char * chars;
+    char *chars;
     char *render;
 } erow;
 
@@ -59,6 +62,7 @@ struct EditorConfig {
     int num_rows;
     // text buffer
     erow *row;
+    int dirty;
     char *filename;
     char statusmsg[80];
     time_t statusmsg_time;
