@@ -53,7 +53,7 @@ void editor_open(char *filename) {
 
 void editor_save() {
     if (E.filename == NULL) {
-        E.filename = editor_prompt("Save as : %s (ESC to cancel)");
+        E.filename = editor_prompt("Save as : %s (ESC to cancel)", NULL);
         if (E.filename == NULL) {
             editor_set_status_message("Save aborted");
             return;

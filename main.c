@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
         editor_open(argv[1]);
     }
 
-    editor_set_status_message("HELP: CTRL-S = save | CTRL-Q = quit");
+    editor_set_status_message("HELP: CTRL-S = save | CTRL-Q = quit | CTRL-F = find");
 
     while (1) {
         editor_refresh_screen();

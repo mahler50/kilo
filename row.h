@@ -4,6 +4,7 @@
 
 #include "kilo.h"
 
+int editor_row_rx_to_cx(erow *row, int rx);
 int editor_row_cx_to_rx(erow *row, int cx);
 void editor_update_row(erow *row);
 /* Insert a row at a specific line */

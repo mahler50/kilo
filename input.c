@@ -5,8 +5,9 @@
 #include "output.h"
 #include "row.h"
 #include "terminal.h"
+#include "find.h"
 
-char *editor_prompt(char *prompt) {
+char *editor_prompt(char *prompt, void (*callback)(char *, int)) {
     size_t buf_size = 128;
     char *buf = malloc(buf_size);
 
@@ -22,11 +23,13 @@ char *editor_prompt(char *prompt) {
             if (buf_len != 0) buf[--buf_len] = '\0';
         } else if (c == '\x1b') {
             editor_set_status_message("");
+            if (callback) callback(buf, c);
             free(buf);
             return NULL;
         } else if (c == '\r') {
             if (buf_len != 0) {
                 editor_set_status_message("");
+                if (callback) callback(buf, c);
                 return buf;
             }
         } else if (!iscntrl(c) && c < 128) {
@@ -37,6 +40,8 @@ char *editor_prompt(char *prompt) {
             buf[buf_len++] = c;
             buf[buf_len] = '\0';
         }
+
+        if (callback) callback(buf, c);
     }
 }
 void editor_move_cursor(int key) {
@@ -116,6 +121,10 @@ void editor_process_keypress() {
             if (E.cy < E.num_rows) {
                 E.cx = E.row[E.cy].size;
             }
+            break;
+
+        case CTRL_KEY('f'):
+            editor_find();
             break;
 
         case BACKSPACE:

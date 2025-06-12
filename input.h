@@ -2,7 +2,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-char *editor_prompt(char *prompt);
+char *editor_prompt(char *prompt, void (*callback)(char *, int));
 void editor_process_keypress();
 void editor_move_cursor(int key);
 
